@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">49erCareerFair</string>
+    <string name="main_title_section1">All</string>
+    <string name="main_title_section2">Filtered</string>
+    <string name="main_title_section3">To Visit</string>
+    <string name="main_title_section4">Visited</string>
+    <string name="filter_title_section1">Majors</string>
+    <string name="filter_title_section2">Positions</string>
+    <string name="filter_title_section3">Degrees</string>
+    <string name="filter_title_section4">Work Auths</string>
+    <string name="filter_title_button1">Clear Filter</string>
+    <string name="filter_title_button2">Apply</string>
+    <string name="hello_world">Hello world</string>
+    <string name="action_settings">Filter</string>
+    <string name="title_activity_filer">Filter</string>
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_launch">LaunchActivity</string>
+    <string name="title_activity_fair_map">FairMap</string>
+    <string name="title_activity_app_start">AppStart</string>
+
+</resources>
