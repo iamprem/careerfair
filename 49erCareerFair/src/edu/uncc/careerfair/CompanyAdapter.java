@@ -2,14 +2,14 @@ package edu.uncc.careerfair;
 
 import java.util.ArrayList;
 
-import edu.uncc.dataclasses.Company;
-
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import edu.uncc.dataclasses.*;
 
 public class CompanyAdapter extends ArrayAdapter<Company> {
 	Context context;
@@ -38,11 +38,11 @@ public class CompanyAdapter extends ArrayAdapter<Company> {
 		}
 
 		company = companies.get(position);
-
+		Log.d("comp",company.toString());
 		// get views
 
 		TextView titleText = (TextView) convertView
-				.findViewById(R.id.textView1);
+				.findViewById(R.id.textViewTitle);
 
 		titleText.setText(company.getName());
 

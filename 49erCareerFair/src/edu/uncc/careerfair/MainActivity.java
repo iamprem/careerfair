@@ -3,20 +3,16 @@ package edu.uncc.careerfair;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import edu.uncc.dataclasses.Company;
-
-import android.app.Activity;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
-import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
+import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,9 +20,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
+import edu.uncc.dataclasses.Company;
 
 public class MainActivity extends Activity implements ActionBar.TabListener {
+	
+	static ArrayList<Company> companies = new ArrayList<Company>();
+	static Company company, company1, company2, company3, company4;
+	static int i=0;
 
 	public static final int ADD_FILTER = 1001;
 	/**
@@ -171,9 +171,9 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 	 */
 	public static class PlaceholderFragment extends Fragment {
 
-		static ArrayList<Company> companies = new ArrayList<Company>();
-		Company company;
+		
 		MainActivity activity;
+		static int position;
 		/**
 		 * The fragment argument representing the section number for this
 		 * fragment.
@@ -188,6 +188,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 			Bundle args = new Bundle();
 			args.putInt(ARG_SECTION_NUMBER, sectionNumber);
 			fragment.setArguments(args);
+			position = (sectionNumber - 1);
 			return fragment;
 		}
 
@@ -199,20 +200,27 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_main, container,
 					false);
+			
+			Log.d("UI", container.toString());
+			if(i==0){
 			company = new Company("Amazon", "test1", "test2", 1);
 			companies.add(company);
-			company = new Company("Facebook", "test1", "test2", 2);
-			companies.add(company);
-			company = new Company("Google", "test1", "test2", 3);
-			companies.add(company);
-			company = new Company("Truecaller", "test1", "test2", 4);
-			companies.add(company);
-			company = new Company("NetApp", "test1", "test2", 5);
-			companies.add(company);
+			company1 = new Company("Facebook", "test1", "test2", 2);
+			companies.add(company1);
+			company2 = new Company("Google", "test1", "test2", 3);
+			companies.add(company2);
+			company3 = new Company("Truecaller", "test1", "test2", 4);
+			companies.add(company3);
+			company4 = new Company("NetApp", "test1", "test2", 5);
+			companies.add(company4);
+			i++;
+			}
 
-			ListView listView = (ListView) container
+			
+			if(position==1){
+			ListView listView = (ListView) rootView
 					.findViewById(R.id.listView1);
-			CompanyAdapter adapter = new CompanyAdapter(,
+			CompanyAdapter adapter = new CompanyAdapter(getActivity(),
 					R.layout.gallery_row_item, companies);
 			adapter.setNotifyOnChange(true);
 			listView.setAdapter(adapter);
@@ -229,7 +237,10 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 					}
 				}
 			});
-
+			}
+			else{
+				
+			}
 			return rootView;
 
 		}

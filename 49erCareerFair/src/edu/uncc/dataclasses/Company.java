@@ -24,6 +24,16 @@ public class Company {
 		this.degrees = degrees;
 		this.workAuths = workAuths;
 	}
+	
+	public Company(String name, String overview, String website,
+			int company_id) {
+		super();
+		this.name = name;
+		this.overview = overview;
+		this.website = website;
+		this.company_id = company_id;
+		
+	}
 
 	public String getName() {
 		return name;
