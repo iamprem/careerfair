@@ -45,9 +45,18 @@ public class LaunchAdapter extends ArrayAdapter<String> {
 		if (listViewItemName.equals("Companies")) {
 			Picasso.with(context).load(R.drawable.companies).into(iv);
 			titleText.setText("Companies");
-		} else {
+		} else if(listViewItemName.equals("Fair Map")) {
 			Picasso.with(context).load(R.drawable.fairmap).into(iv);
 			titleText.setText("Fair Map");
+		}else if(listViewItemName.equals("Events")) {
+			Picasso.with(context).load(R.drawable.calendar).into(iv);
+			titleText.setText("Events");
+		}else if(listViewItemName.equals("Announcement")) {
+			Picasso.with(context).load(R.drawable.announcement).into(iv);
+			titleText.setText("Announcement");
+		}else if(listViewItemName.equals("Career Fair Prep")) {
+			Picasso.with(context).load(R.drawable.careerfairprep).into(iv);
+			titleText.setText("Career Fair Prep");
 		}
 		
 		return convertView;

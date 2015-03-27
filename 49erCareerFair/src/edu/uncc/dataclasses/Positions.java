@@ -1,13 +1,18 @@
 package edu.uncc.dataclasses;
 
-public class Positions {
-	String name;
-	int position_id;
+import java.io.Serializable;
 
-	public Positions(String name, int position_id) {
+public class Positions  implements Serializable{
+	int id;
+	String name;
+	
+	public Positions(String name) {
 		super();
 		this.name = name;
-		this.position_id = position_id;
+	}
+
+	public Positions() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getName() {
@@ -18,17 +23,16 @@ public class Positions {
 		this.name = name;
 	}
 
-	public int getPosition_id() {
-		return position_id;
+	public int getId() {
+		return id;
 	}
 
-	public void setPosition_id(int position_id) {
-		this.position_id = position_id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	@Override
 	public String toString() {
-		return "Positions [name=" + name + ", position_id=" + position_id + "]";
+		return "Positions [id=" + id + ", name=" + name + "]";
 	}
-
 }

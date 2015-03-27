@@ -23,7 +23,9 @@ public class LaunchActivity extends Activity {
         launchs = new ArrayList<String>();
         launchs.add("Companies");
         launchs.add("Fair Map");
-        
+        launchs.add("Events");
+        launchs.add("Announcement");
+        launchs.add("Career Fair Prep");
 
         LaunchAdapter adapter = new LaunchAdapter(this, R.layout.item_row_layout, launchs);
         adapter.setNotifyOnChange(true);

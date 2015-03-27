@@ -1,14 +1,18 @@
 package edu.uncc.dataclasses;
 
-public class Majors {
+import java.io.Serializable;
 
+public class Majors implements Serializable {
+	int id;
 	String name;
-	int major_id;
 
-	public Majors(String name, int major_id) {
+	public Majors(String name) {
 		super();
 		this.name = name;
-		this.major_id = major_id;
+	}
+
+	public Majors() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getName() {
@@ -19,16 +23,17 @@ public class Majors {
 		this.name = name;
 	}
 
-	public int getMajor_id() {
-		return major_id;
+	public int getId() {
+		return id;
 	}
 
-	public void setMajor_id(int major_id) {
-		this.major_id = major_id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	@Override
 	public String toString() {
-		return "Majors [name=" + name + ", major_id=" + major_id + "]";
+		return "Majors [id=" + id + ", name=" + name + "]";
 	}
+
 }

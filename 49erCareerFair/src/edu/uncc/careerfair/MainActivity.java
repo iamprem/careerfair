@@ -1,87 +1,164 @@
 package edu.uncc.careerfair;
 
 import java.util.ArrayList;
-import java.util.Locale;
+import java.util.List;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.parse.FindCallback;
+import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import edu.uncc.database.DatabaseDataManager;
 import edu.uncc.dataclasses.Company;
 
-public class MainActivity extends Activity implements ActionBar.TabListener {
-	
-	static ArrayList<Company> companies = new ArrayList<Company>();
-	static Company company, company1, company2, company3, company4;
-	static int i=0;
+public class MainActivity extends FragmentActivity {
 
-	public static final int ADD_FILTER = 1001;
-	/**
-	 * The {@link android.support.v4.view.PagerAdapter} that will provide
-	 * fragments for each of the sections. We use a {@link FragmentPagerAdapter}
-	 * derivative, which will keep every loaded fragment in memory. If this
-	 * becomes too memory intensive, it may be best to switch to a
-	 * {@link android.support.v13.app.FragmentStatePagerAdapter}.
-	 */
-	SectionsPagerAdapter mSectionsPagerAdapter;
+	private SmartFragmentStatePagerAdapter adapterViewPager;
 
-	/**
-	 * The {@link ViewPager} that will host the section contents.
-	 */
-	ViewPager mViewPager;
+	static DatabaseDataManager dm;
+
+	public static ArrayList<Company> companiesAll = new ArrayList<Company>();
+	public static ArrayList<Company> companiesFiltered = new ArrayList<Company>();
+	public static ArrayList<Company> companiesToVisit = new ArrayList<Company>();
+	public static ArrayList<Company> companiesVisited = new ArrayList<Company>();
+
+	public static ArrayList<String> majorsSelected = new ArrayList<String>();
+	public static ArrayList<String> positionsSelected = new ArrayList<String>();
+	public static ArrayList<String> degreesSelected = new ArrayList<String>();
+	public static ArrayList<String> workAuthsSelected = new ArrayList<String>();
+
+	public static ArrayList<String> majors = new ArrayList<String>();
+	public static ArrayList<String> positions = new ArrayList<String>();
+	public static ArrayList<String> degrees = new ArrayList<String>();
+	public static ArrayList<String> workAuths = new ArrayList<String>();
+
+	ViewPager viewPager = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		// Set up the action bar.
-		final ActionBar actionBar = getActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		dm = new DatabaseDataManager(this);
 
-		// Create the adapter that will return a fragment for each of the three
-		// primary sections of the activity.
-		mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
+		Parse.initialize(this, "qX6M1NbiyH7Xp0aiRRM3NN3RVOQKXRLgT2PnMBsM",
+				"zcSGGkNiYow6iaOKWaLz88PqC42jRlQkVgHva1Cc");
 
-		// Set up the ViewPager with the sections adapter.
-		mViewPager = (ViewPager) findViewById(R.id.pager);
-		mViewPager.setAdapter(mSectionsPagerAdapter);
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("Company");
 
-		// When swiping between different sections, select the corresponding
-		// tab. We can also use ActionBar.Tab#select() to do this if we have
-		// a reference to the Tab.
-		mViewPager
-				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-					@Override
-					public void onPageSelected(int position) {
-						actionBar.setSelectedNavigationItem(position);
-						Log.d("position", position + "");
+		query.findInBackground(new FindCallback<ParseObject>() {
+
+			@Override
+			public void done(List<ParseObject> objects, ParseException e) {
+				// Log.d("4", "4");
+				if (e == null) {
+					// Log.d("5", "5");
+					companiesAll.clear();
+					companiesFiltered.clear();
+					companiesToVisit.clear();
+					companiesVisited.clear();
+					
+					majors.clear();
+					positions.clear();
+					degrees.clear();
+					workAuths.clear();
+					
+					for (ParseObject o : objects) {
+						// Log.d("6", "6");
+						Company a = new Company(o);
+
+						if (dm.getCompanyDao(a.getCompany_id()) != null) {
+							Company com = dm.getCompanyDao(a.getCompany_id());
+							a.setVisitStatus(com.getVisitStatus());
+
+							if (a.getVisitStatus().equals("tovisit")) {
+								companiesToVisit.add(a);
+							} else if (a.getVisitStatus().equals("visited")) {
+								companiesVisited.add(a);
+							}
+						}
+						companiesAll.add(a);
+
 					}
-				});
+				} else {
+					
+				}
 
-		// For each of the sections in the app, add a tab to the action bar.
-		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
-			// Create a tab with text corresponding to the page title defined by
-			// the adapter. Also specify this Activity object, which implements
-			// the TabListener interface, as the callback (listener) for when
-			// this tab is selected.
-			actionBar.addTab(actionBar.newTab()
-					.setText(mSectionsPagerAdapter.getPageTitle(i))
-					.setTabListener(this));
-		}
+				MainActivity.majors.addAll(Company.majorsAll);
+				MainActivity.positions.addAll(Company.positionsAll);
+				MainActivity.degrees.addAll(Company.degreesAll);
+				MainActivity.workAuths.addAll(Company.workAuthsAll);
+
+				viewPager = (ViewPager) MainActivity.this
+						.findViewById(R.id.pager);
+
+				FragmentManager fragmentManager = getSupportFragmentManager();
+				viewPager.setAdapter(new MyAdapter(fragmentManager));
+
+				viewPager.setOffscreenPageLimit(0);
+
+				viewPager
+						.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+							@Override
+							public void onPageSelected(int position) {
+								// ((OnRefreshListener)
+								// viewPager.getAdapter().(position)).onRefresh();
+								refreshMe(position);
+
+							}
+
+							@Override
+							public void onPageScrolled(int arg0, float arg1,
+									int arg2) {
+								// TODO Auto-generated method stub
+								// viewPager.getAdapter().notifyDataSetChanged();
+								// refreshMe();
+							}
+
+							@Override
+							public void onPageScrollStateChanged(int arg0) {
+								// TODO Auto-generated method stub
+								// viewPager.getAdapter().notifyDataSetChanged();
+								// refreshMe();
+							}
+
+						});
+
+			}
+
+		});
+
+	}
+
+	private void refreshMe(int currentIndex) {
+		// TODO Auto-generated method stub
+		viewPager.clearDisappearingChildren();
+		viewPager.getAdapter().notifyDataSetChanged();
+		(((SmartFragmentStatePagerAdapter) viewPager.getAdapter())
+				.getRegisteredFragment(currentIndex)).getView().findViewById(
+				R.id.listView1);
+		((CompanyAdapter) ((ListView) ((SmartFragmentStatePagerAdapter) viewPager
+				.getAdapter()).getRegisteredFragment(currentIndex).getView()
+				.findViewById(R.id.listView1)).getAdapter())
+				.notifyDataSetChanged();
+		// adapterViewPager.getRegisteredFragment(viewPager.getCurrentItem());
+
+		// viewPager.clearDisappearingChildren();
 	}
 
 	@Override
@@ -102,149 +179,83 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 			startActivity(intent);
 			return true;
 		}
+		;
 		return super.onOptionsItemSelected(item);
 	}
 
 	@Override
-	public void onTabSelected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
-		// When the given tab is selected, switch to the corresponding page in
-		// the ViewPager.
-		mViewPager.setCurrentItem(tab.getPosition());
-		Log.d("position1", tab.getPosition() + "");
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		finish();
+		super.onBackPressed();
+	}
 
+}
+
+class MyAdapter extends SmartFragmentStatePagerAdapter {
+
+	public MyAdapter(FragmentManager fm) {
+		super(fm);
 	}
 
 	@Override
-	public void onTabUnselected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
+	public Fragment getItem(int i) {
+		Fragment fragment = null;
+		// Log.d("VIVZ", "get Item is called "+i);
+		if (i == 0) {
+			// Log.d("A", "A");
+			fragment = new FragmentA();
+		}
+		if (i == 1) {
+			// Log.d("B", "B");
+			fragment = new FragmentB();
+		}
+		if (i == 2) {
+			// Log.d("C", "C");
+			fragment = new FragmentC();
+		}
+		if (i == 3) {
+			// Log.d("D", "D");
+			fragment = new FragmentD();
+		}
+		return fragment;
 	}
 
 	@Override
-	public void onTabReselected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
+	public int getCount() {
+		// Log.d("VIVZ", "get Count is called");
+		return 4;
 	}
 
-	/**
-	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-	 * one of the sections/tabs/pages.
-	 */
-	public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-		public SectionsPagerAdapter(FragmentManager fm) {
-			super(fm);
+	@Override
+	public CharSequence getPageTitle(int position) {
+		if (position == 0) {
+			return "All";
 		}
-
-		@Override
-		public Fragment getItem(int position) {
-			// getItem is called to instantiate the fragment for the given page.
-			// Return a PlaceholderFragment (defined as a static inner class
-			// below).
-			return PlaceholderFragment.newInstance(position + 1);
+		if (position == 1) {
+			return "Filtered";
 		}
-
-		@Override
-		public int getCount() {
-			// Show 3 total pages.
-			return 4;
+		if (position == 2) {
+			return "To Visit";
 		}
-
-		@Override
-		public CharSequence getPageTitle(int position) {
-			Locale l = Locale.getDefault();
-			switch (position) {
-			case 0:
-				return getString(R.string.main_title_section1).toUpperCase(l);
-			case 1:
-				return getString(R.string.main_title_section2).toUpperCase(l);
-			case 2:
-				return getString(R.string.main_title_section3).toUpperCase(l);
-			case 3:
-				return getString(R.string.main_title_section4).toUpperCase(l);
-			}
-			return null;
+		if (position == 3) {
+			return "Visited";
 		}
+		return null;
 	}
 
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		
-		MainActivity activity;
-		static int position;
-		/**
-		 * The fragment argument representing the section number for this
-		 * fragment.
-		 */
-		private static final String ARG_SECTION_NUMBER = "section_number";
-
-		/**
-		 * Returns a new instance of this fragment for the given section number.
-		 */
-		public static PlaceholderFragment newInstance(int sectionNumber) {
-			PlaceholderFragment fragment = new PlaceholderFragment();
-			Bundle args = new Bundle();
-			args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-			fragment.setArguments(args);
-			position = (sectionNumber - 1);
-			return fragment;
-		}
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
-					false);
-			
-			Log.d("UI", container.toString());
-			if(i==0){
-			company = new Company("Amazon", "test1", "test2", 1);
-			companies.add(company);
-			company1 = new Company("Facebook", "test1", "test2", 2);
-			companies.add(company1);
-			company2 = new Company("Google", "test1", "test2", 3);
-			companies.add(company2);
-			company3 = new Company("Truecaller", "test1", "test2", 4);
-			companies.add(company3);
-			company4 = new Company("NetApp", "test1", "test2", 5);
-			companies.add(company4);
-			i++;
-			}
-
-			
-			if(position==1){
-			ListView listView = (ListView) rootView
-					.findViewById(R.id.listView1);
-			CompanyAdapter adapter = new CompanyAdapter(getActivity(),
-					R.layout.gallery_row_item, companies);
-			adapter.setNotifyOnChange(true);
-			listView.setAdapter(adapter);
-
-			listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-					if (position == 0) {
-						// Intent intent = new Intent(MainActivity.this,
-						// MainActivity.class);
-						// startActivity(intent);
-					} else {
-
-					}
-				}
-			});
-			}
-			else{
-				
-			}
-			return rootView;
-
-		}
+	@Override
+	public int getItemPosition(Object object) {
+		// TODO Auto-generated method stub
+		return super.getItemPosition(object);
 	}
-	
+
+	@Override
+	public Object instantiateItem(ViewGroup arg0, int arg1) {
+		// TODO Auto-generated method stub
+		Log.d("called", "called");
+
+		return super.instantiateItem(arg0, arg1);
+	}
 
 }

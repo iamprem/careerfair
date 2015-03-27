@@ -1,13 +1,19 @@
 package edu.uncc.dataclasses;
 
-public class WorkAuths {
-	String name;
-	int work_auth_id;
+import java.io.Serializable;
 
-	public WorkAuths(String name, int work_auth_id) {
+
+public class WorkAuths implements Serializable{
+	int id;
+	String name;
+	
+	public WorkAuths(String name) {
 		super();
 		this.name = name;
-		this.work_auth_id = work_auth_id;
+	}
+
+	public WorkAuths() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getName() {
@@ -18,18 +24,16 @@ public class WorkAuths {
 		this.name = name;
 	}
 
-	public int getWork_auth_id() {
-		return work_auth_id;
+	public int getId() {
+		return id;
 	}
 
-	public void setWork_auth_id(int work_auth_id) {
-		this.work_auth_id = work_auth_id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	@Override
 	public String toString() {
-		return "WorkAuths [name=" + name + ", work_auth_id=" + work_auth_id
-				+ "]";
+		return "WorkAuths [id=" + id + ", name=" + name + "]";
 	}
-
 }

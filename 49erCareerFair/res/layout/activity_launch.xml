@@ -2,26 +2,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <ScrollView
-        android:id="@+id/scrollView1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="460dp"
-            android:orientation="horizontal" >
 
             <ListView
                 android:id="@+id/listView1"
                 android:layout_width="match_parent"
-                android:layout_height="460dp" >
+                android:layout_height="match_parent" >
 
             </ListView>
 
-        </LinearLayout>
-    </ScrollView>
 
 </RelativeLayout>
