@@ -1,11 +1,12 @@
 package edu.uncc.careerfair;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,7 +23,9 @@ import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 
 import edu.uncc.database.DatabaseDataManager;
 import edu.uncc.dataclasses.Company;
@@ -96,8 +99,6 @@ public class MainActivity extends FragmentActivity {
 		if (dm.getAllWorkAuthsDao() != null) {
 			workAuthsSelected.addAll(dm.getAllWorkAuthsDao());
 		}
-		
-		
 
 		Parse.initialize(this, "qX6M1NbiyH7Xp0aiRRM3NN3RVOQKXRLgT2PnMBsM",
 				"zcSGGkNiYow6iaOKWaLz88PqC42jRlQkVgHva1Cc");
@@ -162,7 +163,7 @@ public class MainActivity extends FragmentActivity {
 				positions.addAll(Company.positionsAll);
 				degrees.addAll(Company.degreesAll);
 				workAuths.addAll(Company.workAuthsAll);
-			
+
 				Collections.sort(majors, new CustomFilterComparator(1));
 				Collections.sort(positions, new CustomFilterComparator(1));
 				Collections.sort(degrees, new CustomFilterComparator(1));
@@ -365,6 +366,5 @@ class MyAdapter extends SmartFragmentStatePagerAdapter {
 
 		return super.instantiateItem(arg0, arg1);
 	}
-
 
 }
