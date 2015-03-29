@@ -19,7 +19,7 @@ public class LaunchActivity extends Activity {
         setContentView(R.layout.activity_launch);
         
        
-        ListView listView = (ListView) findViewById(R.id.listView1);
+        ListView listView = (ListView) findViewById(R.id.listViewEvent);
         launchs = new ArrayList<String>();
         launchs.add("Companies");
         launchs.add("Fair Map");
@@ -38,8 +38,9 @@ public class LaunchActivity extends Activity {
        				 if(position == 0){
        		        	Intent intent = new Intent(LaunchActivity.this, MainActivity.class);
        		        	startActivity(intent);
-       				 }else{
-       					 
+       				 }else if(position == 2){ //when event is clicked
+       					Intent intent = new Intent(LaunchActivity.this, EventActivity.class);
+       		        	startActivity(intent);
        				 } 	 	 	 	 	
        			 }
         });
