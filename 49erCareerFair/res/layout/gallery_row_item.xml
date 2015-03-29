@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/imageViewStar"
-        android:text="Medium Text"
         android:padding="20dp"
+        android:text="Medium Text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageView

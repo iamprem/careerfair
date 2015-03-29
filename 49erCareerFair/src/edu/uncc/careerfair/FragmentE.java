@@ -32,7 +32,7 @@ public class FragmentE extends Fragment {
 		listView = (ListView) rootView
 				.findViewById(R.id.listView1);
 		adapter = new FilterAdapter(getActivity(),
-				R.layout.filter_row_item, MainActivity.majors, MainActivity.dm);
+				R.layout.filter_row_item, MainActivity.majors, MainActivity.dm, 1);
 		adapter.setNotifyOnChange(true);
 		if(listView.getChildAt(0) != null){
 			listView.removeAllViews();

@@ -1,16 +1,12 @@
 package edu.uncc.database;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import edu.uncc.dataclasses.Company;
-import edu.uncc.dataclasses.Positions;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
+import edu.uncc.dataclasses.Positions;
 
 public class PositionsDAO {
 
@@ -23,7 +19,6 @@ public class PositionsDAO {
 
 	public long save(Positions position) {
 		ContentValues values = new ContentValues();
-		values.put(PositionsTable.COLUMN_ID, position.getId());
 		values.put(PositionsTable.COLUMN_NAME, position.getName());
 		long id = db.insert(PositionsTable.TABLENAME, null, values);
 
@@ -32,26 +27,28 @@ public class PositionsDAO {
 
 	public boolean update(Positions position) {
 		ContentValues values = new ContentValues();
-		values.put(PositionsTable.COLUMN_ID, position.getId());
 		values.put(PositionsTable.COLUMN_NAME, position.getName());
 		return db.update(PositionsTable.TABLENAME, values, PositionsTable.COLUMN_ID
 				+ "=?", new String[] { position.getId() + "" }) > 0;
 	}
 
 	public boolean delete(Positions position) {
-		return db.delete(PositionsTable.TABLENAME, PositionsTable.COLUMN_ID + "=?",
-				new String[] { position.getId() + "" }) > 0;
+		return db.delete(PositionsTable.TABLENAME, PositionsTable.COLUMN_NAME + "=?",
+				new String[] { position.getName() }) > 0;
+	}
+	
+	public boolean delete() {
+		return db.delete(PositionsTable.TABLENAME, null, null) > 0;
 	}
 
 	@SuppressLint("NewApi")
 	public Positions get(int id) {
-
+		
 		Positions position = null;
 
 		Cursor c = db.query(true, PositionsTable.TABLENAME, new String[] {
-				PositionsTable.COLUMN_ID, PositionsTable.COLUMN_NAME },
-				PositionsTable.COLUMN_ID + "=?", new String[] { id + "" }, null,
-				null, null, null, null);
+				PositionsTable.COLUMN_ID, PositionsTable.COLUMN_NAME }, PositionsTable.COLUMN_ID + "=?",
+				new String[] { id + "" }, null, null, null, null, null);
 
 		if (c != null && c.moveToFirst()) {
 
@@ -76,16 +73,15 @@ public class PositionsDAO {
 		return position;
 	}
 
-	public List<Positions> getAll() {
-		List<Positions> positions = new ArrayList<Positions>();
+	public ArrayList<String> getAll() {
+		ArrayList<String> positions = new ArrayList<String>();
 		Cursor c1 = db.query(PositionsTable.TABLENAME, new String[] {
-				PositionsTable.COLUMN_ID, PositionsTable.COLUMN_NAME }, null, null,
-				null, null, null);
+				PositionsTable.COLUMN_ID, PositionsTable.COLUMN_NAME }, null, null, null, null, null);
 		if (c1 != null && c1.moveToFirst()) {
 			do {
 				Positions position = buildFromCursor(c1);
 				if (position != null) {
-					positions.add(position);
+					positions.add(position.getName());
 				}
 				if (!c1.isClosed()) {
 					// c1.close();

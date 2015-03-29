@@ -1,5 +1,6 @@
 package edu.uncc.database;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -56,6 +57,9 @@ public class DatabaseDataManager {
 	public List<Company> getAllCompanyDao() {
 		return this.companyDAO.getAll();
 	}
+	
+	
+	// Majors
 
 	public long saveMajorsDao(Majors major) {
 		return this.majorsDAO.save(major);
@@ -68,15 +72,22 @@ public class DatabaseDataManager {
 	public boolean deleteMajorsDao(Majors major) {
 		return this.majorsDAO.delete(major);
 	}
+	
+	public boolean deleteAllMajorsDao() {
+		return this.majorsDAO.delete();
+	}
 
 	public Majors getMajorsDao(int id) {
 		return this.majorsDAO.get(id);
 	}
 
-	public List<Majors> getAllMajorsDao() {
+	public ArrayList<String> getAllMajorsDao() {
 		return this.majorsDAO.getAll();
 	}
-
+	
+	// Positions
+	
+	
 	public long savePositionsDao(Positions position) {
 		return this.positionsDAO.save(position);
 	}
@@ -88,15 +99,22 @@ public class DatabaseDataManager {
 	public boolean deletePositionsDao(Positions position) {
 		return this.positionsDAO.delete(position);
 	}
+	
+	public boolean deleteAllPositionsDao() {
+		return this.positionsDAO.delete();
+	}
 
 	public Positions getPositionsDao(int id) {
 		return this.positionsDAO.get(id);
 	}
 
-	public List<Positions> getAllPositionsDao() {
+	public ArrayList<String> getAllPositionsDao() {
 		return this.positionsDAO.getAll();
 	}
-
+	
+	
+	// Degrees
+	
 	public long saveDegreesDao(Degrees degree) {
 		return this.degreesDAO.save(degree);
 	}
@@ -108,15 +126,21 @@ public class DatabaseDataManager {
 	public boolean deleteDegreesDao(Degrees degree) {
 		return this.degreesDAO.delete(degree);
 	}
+	
+	public boolean deleteAllDegreesDao() {
+		return this.degreesDAO.delete();
+	}
 
 	public Degrees getDegreesDao(int id) {
 		return this.degreesDAO.get(id);
 	}
 
-	public List<Degrees> getAllDegreesDao() {
+	public ArrayList<String> getAllDegreesDao() {
 		return this.degreesDAO.getAll();
 	}
-
+	
+	// Work Auths
+	
 	public long saveWorkAuthsDao(WorkAuths workAuth) {
 		return this.workAuthsDAO.save(workAuth);
 	}
@@ -128,13 +152,18 @@ public class DatabaseDataManager {
 	public boolean deleteWorkAuthsDao(WorkAuths workAuth) {
 		return this.workAuthsDAO.delete(workAuth);
 	}
+	
+	public boolean deleteAllWorkAuthsDao() {
+		return this.workAuthsDAO.delete();
+	}
 
 	public WorkAuths getWorkAuthsDao(int id) {
 		return this.workAuthsDAO.get(id);
 	}
 
-	public List<WorkAuths> getAllWorkAuthsDao() {
+	public ArrayList<String> getAllWorkAuthsDao() {
 		return this.workAuthsDAO.getAll();
 	}
+
 
 }

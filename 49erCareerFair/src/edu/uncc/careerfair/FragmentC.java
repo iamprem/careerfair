@@ -31,7 +31,7 @@ public class FragmentC extends Fragment {
 		listView = (ListView) rootView
 				.findViewById(R.id.listView1);
 		adapter = new CompanyAdapter(getActivity(),
-				R.layout.gallery_row_item, MainActivity.companiesToVisit, MainActivity.dm);
+				R.layout.company_row_item, MainActivity.companiesToVisit, MainActivity.dm);
 		adapter.setNotifyOnChange(true);
 		if(listView.getChildAt(0) != null){
 			listView.removeAllViews();

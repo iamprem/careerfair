@@ -30,7 +30,7 @@ public class FragmentH extends Fragment {
 		listView = (ListView) rootView
 				.findViewById(R.id.listView1);
 		adapter = new FilterAdapter(getActivity(),
-				R.layout.filter_row_item, MainActivity.workAuths, MainActivity.dm);
+				R.layout.filter_row_item, MainActivity.workAuths, MainActivity.dm, 4);
 		adapter.setNotifyOnChange(true);
 		if(listView.getChildAt(0) != null){
 			listView.removeAllViews();

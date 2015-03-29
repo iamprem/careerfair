@@ -5,7 +5,22 @@
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:showAsAction="never"
+        android:showAsAction="always"
         android:title="@string/action_settings"/>
+    <item
+        android:id="@+id/action_sort_asc"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_sort_asc"/>
+    <item
+        android:id="@+id/action_sort_desc"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_sort_desc"/>
+    <item
+        android:id="@+id/action_sort_status"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_sort_status"/>
 
 </menu>

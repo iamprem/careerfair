@@ -30,7 +30,7 @@ public class FragmentA extends Fragment {
 
 		Log.d("VIVZ", "onCreate FIRST TIME");
 		listView = (ListView) rootView.findViewById(R.id.listView1);
-		adapter = new CompanyAdapter(getActivity(), R.layout.gallery_row_item,
+		adapter = new CompanyAdapter(getActivity(), R.layout.company_row_item,
 				MainActivity.companiesAll, MainActivity.dm);
 		adapter.setNotifyOnChange(true);
 		listView.setAdapter(adapter);

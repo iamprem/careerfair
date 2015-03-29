@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">49erCareerFair</string>
     <string name="main_title_section1">All</string>
     <string name="main_title_section2">Filtered</string>
     <string name="main_title_section3">To Visit</string>
@@ -31,5 +30,23 @@
     <string name="whereTv">Where</string>
     <string name="aboutTv">About</string>
     <string name="contactTv">For any queries please contact</string>
+    <string name="app_name">49erCareerFair</string>
+    <string name="action_sort_asc">Sort From A - Z</string>
+    <string name="action_sort_desc">Sort From Z - A</string>
+    <string name="action_clear">Clear Filters</string>
+    <string name="action_sort_status">Sort By Status</string>
+    <string name="action_sort_selected">Sort Selected</string>
+    <string name="single_touchimageview">Single TouchImageView</string>
+    <string name="mirror_touchimageview">Mirroring Example</string>
+    <string name="viewpager_example">ViewPager Example</string>
+    <string name="switch_image_example">Switch Image Example</string>
+    <string name="switch_scaletype_example">Switch ScaleType Example</string>
+    <string name="get_scroll_position">getScrollPosition():</string>
+    <string name="get_zoomed_rect">getZoomedRect():</string>
+    <string name="get_current_zoom">getCurrentZoom():</string>
+    <string name="mirroring_text">All touch gestures applied to one TouchImageView will be mirrored on the other.</string>
+    <string name="swipe_viewpager">Swipe left or right to test ViewPager.</string>
+    <string name="switch_image_text">Click TouchImageView to cycle through image resources. Note that the zoom state is maintained.</string>
+    <string name="switch_scaletype_text">Click TouchImageView to cycle through supported ScaleTypes.</string>
 
 </resources>

@@ -50,7 +50,7 @@ public class FragmentD extends Fragment {
 		listView = (ListView) rootView
 				.findViewById(R.id.listView1);
 		adapter = new CompanyAdapter(getActivity(),
-				R.layout.gallery_row_item, MainActivity.companiesVisited, MainActivity.dm);
+				R.layout.company_row_item, MainActivity.companiesVisited, MainActivity.dm);
 		adapter.setNotifyOnChange(true);
 		if(listView.getChildAt(0) != null){
 			listView.removeAllViews();

@@ -30,7 +30,7 @@ public class CompanyTable {
 	
 	public static void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
 	{
-		db.execSQL("DROP TABLE IF EXISTS"+ TABLENAME);
+		db.execSQL("DROP TABLE IF EXISTS "+ TABLENAME);
 		CompanyTable.onCreate(db);
 	}
 	

@@ -1,15 +1,12 @@
 package edu.uncc.database;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import edu.uncc.dataclasses.Degrees;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
+import edu.uncc.dataclasses.Degrees;
 
 public class DegreesDAO {
 
@@ -22,7 +19,6 @@ public class DegreesDAO {
 
 	public long save(Degrees degree) {
 		ContentValues values = new ContentValues();
-		values.put(DegreesTable.COLUMN_ID, degree.getId());
 		values.put(DegreesTable.COLUMN_NAME, degree.getName());
 		long id = db.insert(DegreesTable.TABLENAME, null, values);
 
@@ -31,15 +27,18 @@ public class DegreesDAO {
 
 	public boolean update(Degrees degree) {
 		ContentValues values = new ContentValues();
-		values.put(DegreesTable.COLUMN_ID, degree.getId());
 		values.put(DegreesTable.COLUMN_NAME, degree.getName());
 		return db.update(DegreesTable.TABLENAME, values, DegreesTable.COLUMN_ID
 				+ "=?", new String[] { degree.getId() + "" }) > 0;
 	}
 
 	public boolean delete(Degrees degree) {
-		return db.delete(DegreesTable.TABLENAME, DegreesTable.COLUMN_ID + "=?",
-				new String[] { degree.getId() + "" }) > 0;
+		return db.delete(DegreesTable.TABLENAME, DegreesTable.COLUMN_NAME + "=?",
+				new String[] { degree.getName() }) > 0;
+	}
+	
+	public boolean delete() {
+		return db.delete(DegreesTable.TABLENAME, null, null) > 0;
 	}
 
 	@SuppressLint("NewApi")
@@ -74,15 +73,15 @@ public class DegreesDAO {
 		return degree;
 	}
 
-	public List<Degrees> getAll() {
-		List<Degrees> degrees = new ArrayList<Degrees>();
+	public ArrayList<String> getAll() {
+		ArrayList<String> degrees = new ArrayList<String>();
 		Cursor c1 = db.query(DegreesTable.TABLENAME, new String[] {
 				DegreesTable.COLUMN_ID, DegreesTable.COLUMN_NAME }, null, null, null, null, null);
 		if (c1 != null && c1.moveToFirst()) {
 			do {
 				Degrees degree = buildFromCursor(c1);
 				if (degree != null) {
-					degrees.add(degree);
+					degrees.add(degree.getName());
 				}
 				if (!c1.isClosed()) {
 					// c1.close();

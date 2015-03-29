@@ -1,6 +1,9 @@
 package edu.uncc.careerfair;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import android.content.Intent;
@@ -27,8 +30,10 @@ import edu.uncc.dataclasses.Company;
 public class MainActivity extends FragmentActivity {
 
 	private SmartFragmentStatePagerAdapter adapterViewPager;
+	public static int sortWay = 1;
 
 	static DatabaseDataManager dm;
+	public final int intentCode = 1001;
 
 	public static ArrayList<Company> companiesAll = new ArrayList<Company>();
 	public static ArrayList<Company> companiesFiltered = new ArrayList<Company>();
@@ -45,6 +50,11 @@ public class MainActivity extends FragmentActivity {
 	public static ArrayList<String> degrees = new ArrayList<String>();
 	public static ArrayList<String> workAuths = new ArrayList<String>();
 
+	public static HashSet<Company> majorsFilteredCompanies = new HashSet<Company>();
+	public static HashSet<Company> positionsFilteredCompanies = new HashSet<Company>();
+	public static HashSet<Company> degreesFilteredCompanies = new HashSet<Company>();
+	public static HashSet<Company> workAuthsFilteredCompanies = new HashSet<Company>();
+
 	ViewPager viewPager = null;
 
 	@Override
@@ -52,8 +62,42 @@ public class MainActivity extends FragmentActivity {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
 		dm = new DatabaseDataManager(this);
+
+		companiesAll.clear();
+		companiesFiltered.clear();
+		companiesToVisit.clear();
+		companiesVisited.clear();
+
+		majors.clear();
+		positions.clear();
+		degrees.clear();
+		workAuths.clear();
+
+		majorsSelected.clear();
+		positionsSelected.clear();
+		degreesSelected.clear();
+		workAuthsSelected.clear();
+
+		majorsFilteredCompanies.clear();
+		positionsFilteredCompanies.clear();
+		degreesFilteredCompanies.clear();
+		workAuthsFilteredCompanies.clear();
+
+		if (dm.getAllMajorsDao() != null) {
+			majorsSelected.addAll(dm.getAllMajorsDao());
+		}
+		if (dm.getAllPositionsDao() != null) {
+			positionsSelected.addAll(dm.getAllPositionsDao());
+		}
+		if (dm.getAllDegreesDao() != null) {
+			degreesSelected.addAll(dm.getAllDegreesDao());
+		}
+		if (dm.getAllWorkAuthsDao() != null) {
+			workAuthsSelected.addAll(dm.getAllWorkAuthsDao());
+		}
+		
+		
 
 		Parse.initialize(this, "qX6M1NbiyH7Xp0aiRRM3NN3RVOQKXRLgT2PnMBsM",
 				"zcSGGkNiYow6iaOKWaLz88PqC42jRlQkVgHva1Cc");
@@ -64,21 +108,9 @@ public class MainActivity extends FragmentActivity {
 
 			@Override
 			public void done(List<ParseObject> objects, ParseException e) {
-				// Log.d("4", "4");
 				if (e == null) {
-					// Log.d("5", "5");
-					companiesAll.clear();
-					companiesFiltered.clear();
-					companiesToVisit.clear();
-					companiesVisited.clear();
-					
-					majors.clear();
-					positions.clear();
-					degrees.clear();
-					workAuths.clear();
-					
+
 					for (ParseObject o : objects) {
-						// Log.d("6", "6");
 						Company a = new Company(o);
 
 						if (dm.getCompanyDao(a.getCompany_id()) != null) {
@@ -90,26 +122,86 @@ public class MainActivity extends FragmentActivity {
 							} else if (a.getVisitStatus().equals("visited")) {
 								companiesVisited.add(a);
 							}
+						} else {
+							a.setVisitStatus("unchecked");
 						}
 						companiesAll.add(a);
 
+						for (String s : majorsSelected) {
+							if (a.getMajors().contains(s)) {
+								majorsFilteredCompanies.add(a);
+								break;
+							}
+						}
+
+						for (String s : positionsSelected) {
+							if (a.getPositions().contains(s)) {
+								positionsFilteredCompanies.add(a);
+								break;
+							}
+						}
+
+						for (String s : degreesSelected) {
+							if (a.getDegrees().contains(s)) {
+								degreesFilteredCompanies.add(a);
+								break;
+							}
+						}
+
+						for (String s : workAuthsSelected) {
+							if (a.getWorkAuths().contains(s)) {
+								workAuthsFilteredCompanies.add(a);
+								break;
+							}
+						}
+
 					}
-				} else {
-					
 				}
 
-				MainActivity.majors.addAll(Company.majorsAll);
-				MainActivity.positions.addAll(Company.positionsAll);
-				MainActivity.degrees.addAll(Company.degreesAll);
-				MainActivity.workAuths.addAll(Company.workAuthsAll);
+				majors.addAll(Company.majorsAll);
+				positions.addAll(Company.positionsAll);
+				degrees.addAll(Company.degreesAll);
+				workAuths.addAll(Company.workAuthsAll);
+			
+				Collections.sort(majors, new CustomFilterComparator(1));
+				Collections.sort(positions, new CustomFilterComparator(1));
+				Collections.sort(degrees, new CustomFilterComparator(1));
+				Collections.sort(workAuths, new CustomFilterComparator(1));
+
+				if (majorsSelected.size() != 0 || positionsSelected.size() != 0
+						|| degreesSelected.size() != 0
+						|| workAuthsSelected.size() != 0) {
+
+					if (majorsSelected.size() == 0) {
+						majorsFilteredCompanies.addAll(companiesAll);
+					}
+					if (positionsSelected.size() == 0) {
+						positionsFilteredCompanies.addAll(companiesAll);
+					}
+					if (degreesSelected.size() == 0) {
+						degreesFilteredCompanies.addAll(companiesAll);
+					}
+					if (workAuthsSelected.size() == 0) {
+						workAuthsFilteredCompanies.addAll(companiesAll);
+					}
+
+					for (Company com : companiesAll) {
+						if (majorsFilteredCompanies.contains(com)
+								&& positionsFilteredCompanies.contains(com)
+								&& degreesFilteredCompanies.contains(com)
+								&& workAuthsFilteredCompanies.contains(com)) {
+
+							companiesFiltered.add(com);
+
+						}
+					}
+				}
 
 				viewPager = (ViewPager) MainActivity.this
 						.findViewById(R.id.pager);
 
 				FragmentManager fragmentManager = getSupportFragmentManager();
 				viewPager.setAdapter(new MyAdapter(fragmentManager));
-
-				viewPager.setOffscreenPageLimit(0);
 
 				viewPager
 						.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -147,18 +239,10 @@ public class MainActivity extends FragmentActivity {
 
 	private void refreshMe(int currentIndex) {
 		// TODO Auto-generated method stub
-		viewPager.clearDisappearingChildren();
-		viewPager.getAdapter().notifyDataSetChanged();
-		(((SmartFragmentStatePagerAdapter) viewPager.getAdapter())
-				.getRegisteredFragment(currentIndex)).getView().findViewById(
-				R.id.listView1);
 		((CompanyAdapter) ((ListView) ((SmartFragmentStatePagerAdapter) viewPager
 				.getAdapter()).getRegisteredFragment(currentIndex).getView()
 				.findViewById(R.id.listView1)).getAdapter())
 				.notifyDataSetChanged();
-		// adapterViewPager.getRegisteredFragment(viewPager.getCurrentItem());
-
-		// viewPager.clearDisappearingChildren();
 	}
 
 	@Override
@@ -170,16 +254,28 @@ public class MainActivity extends FragmentActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
+
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			Intent intent = new Intent(MainActivity.this, FilterActivity.class);
-			startActivity(intent);
+			startActivityForResult(intent, intentCode);
+			return true;
+		} else if (id == R.id.action_sort_asc) {
+			sortWay = 1;
+			finish();
+			startActivity(getIntent());
+			return true;
+		} else if (id == R.id.action_sort_desc) {
+			sortWay = 2;
+			finish();
+			startActivity(getIntent());
+			return true;
+		} else if (id == R.id.action_sort_status) {
+			sortWay = 3;
+			finish();
+			startActivity(getIntent());
 			return true;
 		}
-		;
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -188,6 +284,18 @@ public class MainActivity extends FragmentActivity {
 		// TODO Auto-generated method stub
 		finish();
 		super.onBackPressed();
+	}
+
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == intentCode) {
+			if (resultCode == RESULT_OK) {
+				finish();
+				startActivity(getIntent());
+			} else if (resultCode == RESULT_CANCELED) {
+				finish();
+				startActivity(getIntent());
+			}
+		}
 	}
 
 }
@@ -236,7 +344,7 @@ class MyAdapter extends SmartFragmentStatePagerAdapter {
 			return "Filtered";
 		}
 		if (position == 2) {
-			return "To Visit";
+			return "Visit";
 		}
 		if (position == 3) {
 			return "Visited";
@@ -257,5 +365,6 @@ class MyAdapter extends SmartFragmentStatePagerAdapter {
 
 		return super.instantiateItem(arg0, arg1);
 	}
+
 
 }

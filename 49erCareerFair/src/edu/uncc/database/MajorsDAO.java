@@ -22,7 +22,6 @@ public class MajorsDAO {
 
 	public long save(Majors major) {
 		ContentValues values = new ContentValues();
-		values.put(MajorsTable.COLUMN_ID, major.getId());
 		values.put(MajorsTable.COLUMN_NAME, major.getName());
 		long id = db.insert(MajorsTable.TABLENAME, null, values);
 
@@ -31,15 +30,18 @@ public class MajorsDAO {
 
 	public boolean update(Majors major) {
 		ContentValues values = new ContentValues();
-		values.put(MajorsTable.COLUMN_ID, major.getId());
 		values.put(MajorsTable.COLUMN_NAME, major.getName());
 		return db.update(MajorsTable.TABLENAME, values, MajorsTable.COLUMN_ID
 				+ "=?", new String[] { major.getId() + "" }) > 0;
 	}
 
 	public boolean delete(Majors major) {
-		return db.delete(MajorsTable.TABLENAME, MajorsTable.COLUMN_ID + "=?",
-				new String[] { major.getId() + "" }) > 0;
+		return db.delete(MajorsTable.TABLENAME, MajorsTable.COLUMN_NAME + "=?",
+				new String[] { major.getName() }) > 0;
+	}
+	
+	public boolean delete() {
+		return db.delete(MajorsTable.TABLENAME, null, null) > 0;
 	}
 
 	@SuppressLint("NewApi")
@@ -74,15 +76,15 @@ public class MajorsDAO {
 		return major;
 	}
 
-	public List<Majors> getAll() {
-		List<Majors> majors = new ArrayList<Majors>();
+	public ArrayList<String> getAll() {
+		ArrayList<String> majors = new ArrayList<String>();
 		Cursor c1 = db.query(MajorsTable.TABLENAME, new String[] {
 				MajorsTable.COLUMN_ID, MajorsTable.COLUMN_NAME }, null, null, null, null, null);
 		if (c1 != null && c1.moveToFirst()) {
 			do {
 				Majors major = buildFromCursor(c1);
 				if (major != null) {
-					majors.add(major);
+					majors.add(major.getName());
 				}
 				if (!c1.isClosed()) {
 					// c1.close();

@@ -1,15 +1,12 @@
 package edu.uncc.database;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import edu.uncc.dataclasses.WorkAuths;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
+import edu.uncc.dataclasses.WorkAuths;
 
 public class WorkAuthsDAO {
 
@@ -22,7 +19,6 @@ public class WorkAuthsDAO {
 
 	public long save(WorkAuths workAuth) {
 		ContentValues values = new ContentValues();
-		values.put(WorkAuthsTable.COLUMN_ID, workAuth.getId());
 		values.put(WorkAuthsTable.COLUMN_NAME, workAuth.getName());
 		long id = db.insert(WorkAuthsTable.TABLENAME, null, values);
 
@@ -31,15 +27,18 @@ public class WorkAuthsDAO {
 
 	public boolean update(WorkAuths workAuth) {
 		ContentValues values = new ContentValues();
-		values.put(WorkAuthsTable.COLUMN_ID, workAuth.getId());
 		values.put(WorkAuthsTable.COLUMN_NAME, workAuth.getName());
 		return db.update(WorkAuthsTable.TABLENAME, values, WorkAuthsTable.COLUMN_ID
 				+ "=?", new String[] { workAuth.getId() + "" }) > 0;
 	}
 
 	public boolean delete(WorkAuths workAuth) {
-		return db.delete(WorkAuthsTable.TABLENAME, WorkAuthsTable.COLUMN_ID + "=?",
-				new String[] { workAuth.getId() + "" }) > 0;
+		return db.delete(WorkAuthsTable.TABLENAME, WorkAuthsTable.COLUMN_NAME + "=?",
+				new String[] { workAuth.getName() }) > 0;
+	}
+	
+	public boolean delete() {
+		return db.delete(WorkAuthsTable.TABLENAME, null, null) > 0;
 	}
 
 	@SuppressLint("NewApi")
@@ -74,15 +73,15 @@ public class WorkAuthsDAO {
 		return workAuth;
 	}
 
-	public List<WorkAuths> getAll() {
-		List<WorkAuths> workAuths = new ArrayList<WorkAuths>();
+	public ArrayList<String> getAll() {
+		ArrayList<String> workAuths = new ArrayList<String>();
 		Cursor c1 = db.query(WorkAuthsTable.TABLENAME, new String[] {
 				WorkAuthsTable.COLUMN_ID, WorkAuthsTable.COLUMN_NAME }, null, null, null, null, null);
 		if (c1 != null && c1.moveToFirst()) {
 			do {
 				WorkAuths workAuth = buildFromCursor(c1);
 				if (workAuth != null) {
-					workAuths.add(workAuth);
+					workAuths.add(workAuth.getName());
 				}
 				if (!c1.isClosed()) {
 					// c1.close();

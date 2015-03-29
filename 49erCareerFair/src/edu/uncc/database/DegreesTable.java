@@ -12,10 +12,9 @@ public class DegreesTable {
 	public static void onCreate(SQLiteDatabase db)
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("CREATE TABLE " + TABLENAME +"(");
+		sb.append("CREATE TABLE " + TABLENAME +" ( ");
 		sb.append(COLUMN_ID+" integer primary key autoincrement, ");
-		sb.append(COLUMN_NAME + " text not null); ");
-
+		sb.append(COLUMN_NAME+" text not null ); ");
 		try
 		{
 			db.execSQL(sb.toString());
@@ -29,7 +28,7 @@ public class DegreesTable {
 	
 	public static void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
 	{
-		db.execSQL("DROP TABLE IF EXISTS"+ TABLENAME);
+		db.execSQL("DROP TABLE IF EXISTS "+ TABLENAME);
 		DegreesTable.onCreate(db);
 	}
 	

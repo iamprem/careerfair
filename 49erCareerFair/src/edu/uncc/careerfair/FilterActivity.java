@@ -1,28 +1,30 @@
 package edu.uncc.careerfair;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import edu.uncc.database.DatabaseDataManager;
-import edu.uncc.dataclasses.Company;
 
 public class FilterActivity extends FragmentActivity {
 
-	static DatabaseDataManager dm;
-
+	public static int refreshFilter = 0;
+	public static int sortWay = 1;
 	ViewPager viewPager = null;
+
+	public static LinkedHashSet<String> majorsFilterSorted = new LinkedHashSet<String>();
+	public static LinkedHashSet<String> positionsFilterSorted = new LinkedHashSet<String>();
+	public static LinkedHashSet<String> degreesFilterSorted = new LinkedHashSet<String>();
+	public static LinkedHashSet<String> workAuthsFilterSorted = new LinkedHashSet<String>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,13 @@ public class FilterActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+//		if(sortWay == 1){
+//			Collections.sort(MainActivity.majors);
+//			Collections.sort(MainActivity.positions);
+//			Collections.sort(MainActivity.degrees);
+//			Collections.sort(MainActivity.workAuths);
+//		}
+		
 		viewPager = (ViewPager) FilterActivity.this.findViewById(R.id.pager);
 
 		FragmentManager fragmentManager = getSupportFragmentManager();
@@ -67,11 +76,6 @@ public class FilterActivity extends FragmentActivity {
 
 	private void refreshMe(int currentIndex) {
 		// TODO Auto-generated method stub
-		viewPager.clearDisappearingChildren();
-		viewPager.getAdapter().notifyDataSetChanged();
-		(((SmartFragmentStatePagerAdapter) viewPager.getAdapter())
-				.getRegisteredFragment(currentIndex)).getView().findViewById(
-				R.id.listView1);
 		((FilterAdapter) ((ListView) ((SmartFragmentStatePagerAdapter) viewPager
 				.getAdapter()).getRegisteredFragment(currentIndex).getView()
 				.findViewById(R.id.listView1)).getAdapter())
@@ -81,7 +85,7 @@ public class FilterActivity extends FragmentActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.filer, menu);
 		return true;
 	}
 
@@ -91,10 +95,35 @@ public class FilterActivity extends FragmentActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			Intent intent = new Intent(FilterActivity.this,
-					FilterActivity.class);
-			startActivity(intent);
+		if (id == R.id.action_clear) {
+			MainActivity.dm.deleteAllMajorsDao();
+			MainActivity.dm.deleteAllPositionsDao();
+			MainActivity.dm.deleteAllDegreesDao();
+			MainActivity.dm.deleteAllWorkAuthsDao();
+
+			MainActivity.majorsSelected.clear();
+			MainActivity.positionsSelected.clear();
+			MainActivity.degreesSelected.clear();
+			MainActivity.workAuthsSelected.clear();
+
+			refreshFilter = 1;
+			finish();
+			startActivity(getIntent());
+			return true;
+		} else if (id == R.id.action_sort_asc) {
+			sortWay = 1;
+			finish();
+			startActivity(getIntent());
+			return true;
+		} else if (id == R.id.action_sort_desc) {
+			sortWay = 2;
+			finish();
+			startActivity(getIntent());
+			return true;
+		}else if (id == R.id.action_sort_selected) {
+			sortWay = 3;
+			finish();
+			startActivity(getIntent());
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -103,6 +132,11 @@ public class FilterActivity extends FragmentActivity {
 	@Override
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
+		if (refreshFilter == 0) {
+			setResult(RESULT_CANCELED);
+		} else if (refreshFilter == 1) {
+			setResult(RESULT_OK);
+		}
 		finish();
 		super.onBackPressed();
 	}
