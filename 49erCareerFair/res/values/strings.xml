@@ -25,5 +25,11 @@
     <string name="title_activity_main_activitys">MainActivitys</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_preview">PreviewActivity</string>
+    <string name="title_activity_event">Events</string>
+    <string name="title_activity_event_detail">Event Details</string>
+    <string name="whenTv">When</string>
+    <string name="whereTv">Where</string>
+    <string name="aboutTv">About</string>
+    <string name="contactTv">For any queries please contact</string>
 
 </resources>

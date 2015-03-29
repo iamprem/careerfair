@@ -63,6 +63,14 @@
             android:name=".PreviewActivity"
             android:label="@string/title_activity_preview" >
         </activity>
+        <activity
+            android:name=".EventActivity"
+            android:label="@string/title_activity_event" >
+        </activity>
+        <activity
+            android:name=".EventDetailActivity"
+            android:label="@string/title_activity_event_detail" >
+        </activity>
     </application>
 
 </manifest>
