@@ -1,17 +1,15 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayoutEvent"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="${relativePackage}.${activityClass}" >
-    
-        <ListView
-            android:id="@+id/listViewEvent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/eventList_padding" >
+    android:background="#FFFFFF" >
 
+    <ListView
+        android:id="@+id/listViewEvent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
     </ListView>
 
-</LinearLayout>
+</RelativeLayout>

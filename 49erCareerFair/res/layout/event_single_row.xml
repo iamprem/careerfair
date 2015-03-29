@@ -3,22 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/event_single_row_padding" >
+    android:padding="15dp" >
 
     <TextView
         android:id="@+id/eventTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
         android:text="Event Title"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="17dp" />
+        android:textSize="17dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/eventDayTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
         android:text="Event Date and Time"
         android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#8A8A8A"
         android:textSize="12dp" />
 
 </LinearLayout>
