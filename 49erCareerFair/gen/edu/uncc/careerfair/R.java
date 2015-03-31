@@ -39,22 +39,23 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class drawable {
         public static final int accept=0x7f020000;
         public static final int announcement=0x7f020001;
-        public static final int calendar=0x7f020002;
-        public static final int careerfair=0x7f020003;
-        public static final int careerfairprep=0x7f020004;
-        public static final int companies=0x7f020005;
-        public static final int fairmap=0x7f020006;
-        public static final int favorites_grey=0x7f020007;
-        public static final int favorites_yellow=0x7f020008;
-        public static final int green=0x7f020009;
-        public static final int greennew=0x7f02000a;
-        public static final int ic_launcher=0x7f02000b;
-        public static final int multi=0x7f02000c;
-        public static final int red=0x7f02000d;
-        public static final int rednew=0x7f02000e;
-        public static final int sac=0x7f02000f;
-        public static final int white=0x7f020010;
-        public static final int whitenew=0x7f020011;
+        public static final int app_logo=0x7f020002;
+        public static final int calendar=0x7f020003;
+        public static final int careerfair=0x7f020004;
+        public static final int careerfairprep=0x7f020005;
+        public static final int companies=0x7f020006;
+        public static final int fairmap=0x7f020007;
+        public static final int favorites_grey=0x7f020008;
+        public static final int favorites_yellow=0x7f020009;
+        public static final int green=0x7f02000a;
+        public static final int greennew=0x7f02000b;
+        public static final int ic_launcher=0x7f02000c;
+        public static final int multi=0x7f02000d;
+        public static final int red=0x7f02000e;
+        public static final int rednew=0x7f02000f;
+        public static final int sac=0x7f020010;
+        public static final int white=0x7f020011;
+        public static final int whitenew=0x7f020012;
     }
     public static final class id {
         public static final int LinearLayout1=0x7f090002;
@@ -91,30 +92,31 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int title=0x7f09000d;
     }
     public static final class layout {
-        public static final int activity_app_start=0x7f030000;
-        public static final int activity_event=0x7f030001;
-        public static final int activity_event_detail=0x7f030002;
-        public static final int activity_fair_map=0x7f030003;
-        public static final int activity_filter=0x7f030004;
-        public static final int activity_launch=0x7f030005;
-        public static final int activity_main=0x7f030006;
-        public static final int activity_preview=0x7f030007;
-        public static final int activity_switch_image_example=0x7f030008;
-        public static final int company_row_item=0x7f030009;
-        public static final int event_single_row=0x7f03000a;
-        public static final int filter_row_item=0x7f03000b;
-        public static final int fragment_a=0x7f03000c;
-        public static final int fragment_b=0x7f03000d;
-        public static final int fragment_c=0x7f03000e;
-        public static final int fragment_d=0x7f03000f;
-        public static final int fragment_e=0x7f030010;
-        public static final int fragment_f=0x7f030011;
-        public static final int fragment_filter=0x7f030012;
-        public static final int fragment_g=0x7f030013;
-        public static final int fragment_h=0x7f030014;
-        public static final int fragment_main=0x7f030015;
-        public static final int gallery_row_item=0x7f030016;
-        public static final int item_row_layout=0x7f030017;
+        public static final int activity_announcements=0x7f030000;
+        public static final int activity_app_start=0x7f030001;
+        public static final int activity_event=0x7f030002;
+        public static final int activity_event_detail=0x7f030003;
+        public static final int activity_fair_map=0x7f030004;
+        public static final int activity_filter=0x7f030005;
+        public static final int activity_launch=0x7f030006;
+        public static final int activity_main=0x7f030007;
+        public static final int activity_preview=0x7f030008;
+        public static final int activity_switch_image_example=0x7f030009;
+        public static final int company_row_item=0x7f03000a;
+        public static final int event_single_row=0x7f03000b;
+        public static final int filter_row_item=0x7f03000c;
+        public static final int fragment_a=0x7f03000d;
+        public static final int fragment_b=0x7f03000e;
+        public static final int fragment_c=0x7f03000f;
+        public static final int fragment_d=0x7f030010;
+        public static final int fragment_e=0x7f030011;
+        public static final int fragment_f=0x7f030012;
+        public static final int fragment_filter=0x7f030013;
+        public static final int fragment_g=0x7f030014;
+        public static final int fragment_h=0x7f030015;
+        public static final int fragment_main=0x7f030016;
+        public static final int gallery_row_item=0x7f030017;
+        public static final int item_row_layout=0x7f030018;
     }
     public static final class menu {
         public static final int filer=0x7f080000;
@@ -156,6 +158,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int switch_image_text=0x7f06002d;
         public static final int switch_scaletype_example=0x7f060027;
         public static final int switch_scaletype_text=0x7f06002e;
+        public static final int title_activity_announcements=0x7f06002f;
         public static final int title_activity_app_start=0x7f060012;
         public static final int title_activity_data=0x7f060013;
         public static final int title_activity_event=0x7f060017;
@@ -200,11 +203,16 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f070001;
-        public static final int ButtonBar=0x7f070003;
-        public static final int ButtonBarButton=0x7f070004;
-        public static final int FullscreenActionBarStyle=0x7f070005;
-        public static final int FullscreenTheme=0x7f070002;
+        public static final int AppTheme=0x7f070004;
+        public static final int ButtonBar=0x7f070006;
+        public static final int ButtonBarButton=0x7f070007;
+        public static final int FullscreenActionBarStyle=0x7f070008;
+        public static final int FullscreenTheme=0x7f070005;
+        /**  Custom theme for the Action Bar 
+         */
+        public static final int myTheme=0x7f070001;
+        public static final int myTheme_ActionBar=0x7f070002;
+        public static final int myTheme_ActionBar_Text=0x7f070003;
     }
     public static final class styleable {
         /** 
