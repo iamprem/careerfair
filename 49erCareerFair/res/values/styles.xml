@@ -12,7 +12,7 @@
             backward-compatibility can go here.
         -->
     </style>
-    
+
     <!-- Custom theme for the Action Bar -->
     <style name="myTheme" parent="@android:style/Theme.Holo.Light">
         <item name="android:actionBarStyle">@style/myTheme.ActionBar</item>
@@ -48,5 +48,12 @@
     </style>
 
     <style name="ButtonBarButton" />
+
+    <style name="viepagertitlestrip">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 
 </resources>

@@ -206,13 +206,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int AppTheme=0x7f070004;
         public static final int ButtonBar=0x7f070006;
         public static final int ButtonBarButton=0x7f070007;
-        public static final int FullscreenActionBarStyle=0x7f070008;
+        public static final int FullscreenActionBarStyle=0x7f070009;
         public static final int FullscreenTheme=0x7f070005;
         /**  Custom theme for the Action Bar 
          */
         public static final int myTheme=0x7f070001;
         public static final int myTheme_ActionBar=0x7f070002;
         public static final int myTheme_ActionBar_Text=0x7f070003;
+        public static final int viepagertitlestrip=0x7f070008;
     }
     public static final class styleable {
         /** 
