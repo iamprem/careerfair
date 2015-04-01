@@ -5,6 +5,7 @@ import java.util.Collections;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,7 +26,7 @@ public class CompanyAdapter extends ArrayAdapter<Company> {
 	ImageView iv;
 	TextView tv;
 	DatabaseDataManager dm;
-
+	final static String COMPANY_KEY = "company";
 	public CompanyAdapter(Context context, int resource,
 			ArrayList<Company> objects, DatabaseDataManager dm) {
 		super(context, R.layout.company_row_item, objects);
@@ -103,7 +104,12 @@ public class CompanyAdapter extends ArrayAdapter<Company> {
 		public void onClick(View v) {
 			{
 				//Log.d("position", companies.get(position).toString());
+				//Prem - Company page
+				
+				Company company = companies.get(position);
+				Log.d("prem", company + "");
 				Intent intent = new Intent(context, PreviewActivity.class);
+				intent.putExtra(COMPANY_KEY, company);
 				context.startActivity(intent);
 			}
 

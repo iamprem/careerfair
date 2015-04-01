@@ -49,5 +49,12 @@
     <string name="switch_image_text">Click TouchImageView to cycle through image resources. Note that the zoom state is maintained.</string>
     <string name="switch_scaletype_text">Click TouchImageView to cycle through supported ScaleTypes.</string>
     <string name="title_activity_announcements">Announcements</string>
+    <string name="preview_activity_overview">Overview</string>
+    <string name="preview_activity_website">Website</string>
+    <string name="preview_activity_majors">Majors Recruited</string>
+    <string name="preview_activity_positions">Position Types</string>
+    <string name="preview_activity_degree">Degree Levels Recruited</string>
+    <string name="preview_activity_workauth">Work Authorization Desired</string>
+    <string name="preview_activity_showmap">Show Map</string>
 
 </resources>

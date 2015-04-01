@@ -1,16 +1,152 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/PreviewActivity_RelativeLayout1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="edu.uncc.careerfair.PreviewActivity" >
+    android:layout_height="match_parent" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+    <ScrollView
+        android:id="@+id/PreviewActivity_ScrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="55dp" >
+
+        <LinearLayout
+            android:id="@+id/PreviewActivity_LinearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            tools:context="edu.uncc.careerfair.PreviewActivity" >
+
+            <TextView
+                android:id="@+id/textViewCompanyName"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#242424"
+                android:gravity="center"
+                android:text="TextView"
+                android:textColor="@android:color/white"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewBoothId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#242424"
+                android:gravity="center"
+                android:text="Booth No A"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/textViewOverviewTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/top_padding"
+                android:text="@string/preview_activity_overview"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewOverviewDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="0dp"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/textViewWebsiteTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/top_padding"
+                android:text="@string/preview_activity_website"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewWebsiteDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="0dp"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/textViewMojorsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/top_padding"
+                android:text="@string/preview_activity_majors"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewMajorsDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="0dp"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/textViewPositionsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/top_padding"
+                android:text="@string/preview_activity_positions"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewPositionsDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="0dp"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/textViewDegreeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/top_padding"
+                android:text="@string/preview_activity_degree"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewDegreeDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="0dp"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/textViewWorkAuthTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/top_padding"
+                android:text="@string/preview_activity_workauth"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewWorkAuthDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="0dp"
+                android:textSize="14dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_showmap"
+        android:background="#006831"
+        android:textColor="#ffffff"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-5dip"
+        android:layout_marginLeft="-5dip"
+        android:layout_marginRight="-5dip"
+        android:layout_marginTop="-5dip"
+        android:text="@string/preview_activity_showmap" />
 
 </RelativeLayout>
