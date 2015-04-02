@@ -40,7 +40,7 @@ public class LaunchAdapter extends ArrayAdapter<String> {
 		// get views
 		ImageView iv = (ImageView) convertView.findViewById(R.id.imageView1);
 		TextView titleText = (TextView) convertView
-				.findViewById(R.id.textView1);
+				.findViewById(R.id.textViewContactNumber);
 
 		if (listViewItemName.equals("Companies")) {
 			Picasso.with(context).load(R.drawable.companies).into(iv);

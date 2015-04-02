@@ -7,5 +7,6 @@
     <dimen name="eventList_padding">15dp</dimen>
     <dimen name="event_single_row_padding">10dp</dimen>
     <dimen name="top_padding">10dp</dimen>
+    <dimen name="buttonPadding">20dp</dimen>
 
 </resources>

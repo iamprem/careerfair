@@ -1,13 +1,14 @@
 package edu.uncc.dataclasses;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import com.parse.ParseObject;
 
 public class Event implements Serializable {
 	
 	int event_id;
-	String eventName ,eventDate ,eventTime,eventDetail , eventVenue, contactPerson , contact;
+	String eventName ,eventDate ,eventTime,eventDetail , eventVenue, contactPerson , contact ,contactEmail;
 	
 	
 	
@@ -21,6 +22,7 @@ public class Event implements Serializable {
 		this.eventVenue = eventVenue;
 		this.contactPerson = contactPerson;
 		this.contact = contact;
+		this.contactEmail = contactEmail;
 	}
 	
 	public Event(ParseObject o) {
@@ -31,8 +33,19 @@ public class Event implements Serializable {
 		this.contactPerson = o.getString("contact_person");
 		this.contact = o.getString("contact_number");
 		this.eventDate = o.getString("event_date");
+		this.contactEmail = o.getString("contact_email");
 	}
 	
+	
+	
+	public String getContactEmail() {
+		return contactEmail;
+	}
+
+	public void setContactEmail(String contactEmail) {
+		this.contactEmail = contactEmail;
+	}
+
 	public String getEventName() {
 		return eventName;
 	}
@@ -92,14 +105,16 @@ public class Event implements Serializable {
 	 	 
 	 	 return sb.toString();
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Event [eventName=" + eventName + ", eventDate=" + eventDate
 				+ ", eventTime=" + eventTime + ", eventDetail=" + eventDetail
 				+ ", eventVenue=" + eventVenue + ", contactPerson="
-				+ contactPerson + ", contact=" + contact + "]";
+				+ contactPerson + ", contact=" + contact + ", contactEmail="
+				+ contactEmail + "]";
 	}
+	
 	
 	
 	

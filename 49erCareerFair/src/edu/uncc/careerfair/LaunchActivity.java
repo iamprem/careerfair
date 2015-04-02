@@ -29,7 +29,7 @@ public class LaunchActivity extends Activity {
 				"zcSGGkNiYow6iaOKWaLz88PqC42jRlQkVgHva1Cc");
 		ParseInstallation.getCurrentInstallation().saveInBackground();
 		
-		ListView listView = (ListView) findViewById(R.id.listViewEvent);
+		ListView listView = (ListView) findViewById(R.id.listViewAnnoun);
 		launchs = new ArrayList<String>();
 		launchs.add("Companies");
 		launchs.add("Fair Map");
@@ -58,7 +58,7 @@ public class LaunchActivity extends Activity {
 					startActivity(intent);
 				} else if (position == 3) { // when event is clicked
 					Intent intent = new Intent(LaunchActivity.this,
-							Announcements.class);
+							AnnouncementListActivity.class);
 					intent.putExtra("Announcements", 1001);
 					startActivity(intent);
 				}

@@ -30,7 +30,7 @@ public class EventActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event);
 		
-		final ListView myListView = (ListView) findViewById(R.id.listViewEvent);
+		final ListView myListView = (ListView) findViewById(R.id.listViewAnnoun);
 		Parse.initialize(this, "qX6M1NbiyH7Xp0aiRRM3NN3RVOQKXRLgT2PnMBsM",
 				"zcSGGkNiYow6iaOKWaLz88PqC42jRlQkVgHva1Cc");
 

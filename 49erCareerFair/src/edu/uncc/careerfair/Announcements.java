@@ -18,7 +18,7 @@ public class Announcements extends Activity {
 		setContentView(R.layout.activity_announcements);
 		
 		
-		if(getIntent().getExtras().containsKey("Announcements")){
+		/*if(getIntent().getExtras().containsKey("Announcements")){
 			
 		}else{
 		ParsePush.subscribeInBackground("", new SaveCallback() {
@@ -51,6 +51,6 @@ public class Announcements extends Activity {
 				}
 			}
 		});
-		}
+		}*/
 	}
 }
