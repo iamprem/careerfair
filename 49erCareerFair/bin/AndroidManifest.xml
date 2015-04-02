@@ -19,6 +19,7 @@
     <!--
   IMPORTANT: Change "com.parse.starter.permission.C2D_MESSAGE" in the lines below
   to match your app's package name + ".permission.C2D_MESSAGE".
+<<<<<<< HEAD
     -->
     <permission
         android:name="edu.uncc.careerfair.permission.C2D_MESSAGE"
@@ -130,4 +131,113 @@
         </activity>
     </application>
 
+=======
+    -->
+    <permission
+        android:name="edu.uncc.careerfair.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="edu.uncc.careerfair.permission.C2D_MESSAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/app_logo"
+        android:label="@string/app_name"
+        android:theme="@style/myTheme" >
+        <activity
+            android:name=".DataActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".FilterActivity"
+            android:label="@string/title_activity_filer" >
+        </activity>
+        <activity
+            android:name=".FullscreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_fullscreen"
+            android:theme="@style/FullscreenTheme" >
+        </activity>
+        <activity
+            android:name=".LaunchActivity"
+            android:label="@string/title_activity_launch" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".FairMap"
+            android:label="@string/title_activity_fair_map" >
+        </activity>
+        <activity
+            android:name=".AppStart"
+            android:label="@string/title_activity_app_start" >
+        </activity>
+        <activity
+            android:name=".Data"
+            android:label="@string/title_activity_data" >
+        </activity>
+        <activity
+            android:name=".MainActivitys"
+            android:label="@string/title_activity_main_activitys" >
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main" >
+        </activity>
+        <activity
+            android:name=".PreviewActivity"
+            android:label="@string/title_activity_preview" >
+        </activity>
+        <activity
+            android:name=".EventActivity"
+            android:label="@string/title_activity_event" >
+        </activity>
+        <activity
+            android:name=".EventDetailActivity"
+            android:label="@string/title_activity_event_detail" >
+        </activity>
+        <activity
+            android:name=".SwitchImageExampleActivity"
+            android:label="@string/title_activity_preview" >
+        </activity>
+
+        <service android:name="com.parse.PushService" />
+
+        <receiver android:name="com.parse.ParseBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".PushNotifier"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.parse.push.intent.RECEIVE" />
+                <action android:name="com.parse.push.intent.DELETE" />
+                <action android:name="com.parse.push.intent.OPEN" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.parse.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <!-- IMPORTANT: Change "com.parse.starter" to match your app's package name. -->
+                <category android:name="edu.uncc.careerfair" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".Announcements"
+            android:label="@string/title_activity_announcements" >
+        </activity>
+    </application>
+
+>>>>>>> 2c5d44b1cd7214fe649610cbee13a2224612ef77
 </manifest>
